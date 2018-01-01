@@ -137,10 +137,7 @@ cad 命令：
 
 -------------------------------------------------------------
 2018-1-1
-autocad
-
-
-git windows安装
+1、git windows安装
 安装完成后，还需要最后一步设置，在命令行输入：
 $ git config --global user.name "你再github上注册的用户名"
 $ git config --global user.email "注册时候的邮箱"
@@ -156,9 +153,9 @@ $ pwd
 通过git init命令把这个目录变成Git可以管理的仓库：
 
 $ git init
-
-第二步，用命令git commit告诉Git，把文件提交到仓库：
-
+添加文件到Git仓库，分两步：
+    第一步，使用命令git add <file>，注意，可反复多次使用，添加多个文件；
+    第二步，使用命令git commit，完成。
 $ git commit -m "wrote a readme file"
 
 为了学Git先搭个服务器绝对是小题大作。好在这个世界上有个叫GitHub的神奇的网站，从名字就可以看出，这个网站就是提供Git仓库托管服务的，所以，只要注册一个GitHub账号，就可以免费获得Git远程仓库。
@@ -193,7 +190,7 @@ $ git remote add origin git@github.com:michaelliao/learngit.git
 $ git remote add origin git@github.com:dangjunhui/learngit.git
 
 
-$ git push -u origin master
+$ git push -u origin master  (第一次提交)
 The authenticity of host 'github.com (192.30.255.113)' can't be established.
 RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
 Are you sure you want to continue connecting (yes/no)? yes
@@ -222,7 +219,7 @@ git remote add origin git@github.com:dangjunhui/learngit.git；
 $ git clone git@github.com:dangjunhui/gitskills.git
 
 因此，多人协作的工作模式通常是这样：
-    首先，可以试图用git push origin branch-name推送自己的修改；
+    首先，可以试图用 git push origin branch-name 推送自己的修改；
     如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
     如果合并有冲突，则解决冲突，并在本地提交；
     没有冲突或者解决掉冲突后，再用git push origin branch-name推送就能成功！
@@ -239,6 +236,7 @@ $ git clone git@github.com:dangjunhui/gitskills.git
 退出vim
 按了ESC后直接按:x
 
+2、接着学习autocad（平面图设计）
 
 
 
