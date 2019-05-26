@@ -1,0 +1,335 @@
+切换到root用户:
+su root
+输入密码:123abc!@#ll
+
+
+三、安装Oracle要依赖的软件并安装
+1、YUM安装
+yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-devel glibc glibc-common glibc-devel gcc gcc-c++ libaio-devel libaio libgcc libstdc++ libstdc++-devel make sysstat unixODBC unixODBC-devel pdksh numactl-devel glibc-headers
+
+oracle账户
+Oracle Database 11g Release 2 (11.2.0.1.0) for Linux x86-64 下载地址
+https://www.oracle.com/technetwork/database/enterprise-edition/downloads/112010-linx8664soft-100572.html
+616172218@qq.com/Djh123abc!@#ll
+linux.x64_11gR2_database_1of2.zip (1,239,269,270 bytes) (cksum - 3152418844)
+linux.x64_11gR2_database_2of2.zip (1,111,416,131 bytes) (cksum - 3669256139)
+
+输入命令：
+unzip  linux.x64_11gR2_database_1of2.zip
+unzip  linux.x64_11gR2_database_2of2.zip
+chown -R oracle:oinstall /home/oracle/database　
+
+oracle 客户端下载与安装：
+下载地址:
+https://www.oracle.com/technetwork/cn/database/enterprise-edition/downloads/112010-win64soft-086667-zhs.html
+
+使用 rm -rf filedir
+
+该命令会直接删除文件夹，不会给出警告信息和提示
+
+Xmanager6注册激活说明
+1、下载Xmanager 6，使用上面的安装教程进行安装。
+2、安装时，使用下面的注册信息。
+Xmanager6企业版 6.0095 含产品秘钥
+用户名：newasp
+公司名称：newasp
+序列号：181030-116246-999646
+
+3、安装完成后即为中文破解版。
+
+用中文版的linux去安装英文版的oracle的时候发现乱码问题：
+逃避法，改用英文界面安装
+[root@dbserver ~]# su - oracle
+[oracle@dbserver ~]$ export LANG=en_US.UTF-8
+[oracle@dbserver ~]$ cd /home/oracle/database/
+[oracle@dbserver ~]$ ./runInstaller
+616172218@qq.com
+
+
+
+/home/oracle/app/oraInventory/orainstRoot.sh
+/home/oracle/app/oracle/product/11.2.0/dbhome_1/root.sh
+
+vim /etc/profile
+export PATH=$PATH:/home/oracle/app/oracle/product/11.2.0/dbhome_1/bin
+
+export DISPLAY=192.168.0.145:0.0   // 图形界面显示在那台电脑的IP地址
+/home/oracle/app/oracle/product/11.2.0/dbhome_1/bin/dbca // 创建数据库
+
+orcl
+wmsm
+orcl_ic
+配置监听
+export LANG=en_US.UTF-8
+/home/oracle/app/oracle/product/11.2.0/dbhome_1/bin/netca
+
+/home/oracle/app/oracle/product/11.2.0/dbhome_1/network/admin/listener.ora
+
+Oracle配置:
+export ORACLE_BASE=/home/oracle/app/oracle; 
+export ORACLE_HOME=$ORACLE_BASE/product/11.2.0/dbhome_1; 
+export ORACLE_SID=orcl; 
+export PATH=$ORACLE_HOME/bin:$PATH;
+
+hosts配置
+192.168.65.128  www.cmzsteven.com.localdomain www.cmzsteven.com
+localhost localhost.localdomain localhost6 localhost6.localdomain6
+
+vim /home/oracle/app/oracle/product/11.2.0/dbhome_1/network/admin/listener.ora
+
+LISTENER =
+  (DESCRIPTION_LIST =
+    (DESCRIPTION =
+      (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.65.128)(PORT = 1521))
+    )
+  )
+  
+打开终端
+plsqldev12 下载和安装，包含语言包：
+下载地址 https://www.allroundautomations.com/bodyplsqldevreg.html
+
+product code  4vkjwhfeh3ufnqnmpr9brvcuyujrx3n3le 
+serial Number 226959 
+password  xs374ca
+
+linux oracle 数据库
+用户名:hc_notify/hc_password
+
+LANG
+zh_CN.GBK
+NLS_LANG
+AMERICAN_AMERICA.ZHS16GBK
+
+win10系统安装oracle11g时遇到INS-13001环境不满足最低要求解决办法
+</OPERATING_SYSTEM>
+<OPERATING_SYSTEM RELEASE="6.2">
+           <VERSION VALUE="3"/>
+           <ARCHITECTURE VALUE="64-bit"/>
+           <NAME VALUE="Windows 10"/>
+           <ENV_VAR_LIST>
+               <ENV_VAR NAME="PATH" MAX_LENGTH="1023" />
+           </ENV_VAR_LIST> 
+</OPERATING_SYSTEM>
+--------------------- 
+
+C:\app\dangjunhui\product\11.2.0\client_1
+C:\app\dangjunhui\product\11.2.0\client_1\BIN\oci.dll
+
+1.cmd---services.msc----以Oracle开头TNListener结尾的服务启动它
+
+如果你要改用iptables的话，需要安装iptables服务：
+sudo yum install iptables-services
+sudo systemctl enable iptables && sudo systemctl enable ip6tables
+sudo systemctl start iptables && sudo systemctl start ip6tables
+
+
+问题原因：数据库实例没注册到listener
+
+ORA-01034: ORACLE not available ORA-27101
+在listener.ora里面添加了一行
+SID_LIST_LISTENER =  
+(SID_LIST =  
+  (SID_DESC =  
+  (GLOBAL_DBNAME = orcl)
+  (SID_NAME = orcl)
+  )
+)
+
+注：里面的orcl根据你安装的数据库实例名确定，我用此法解决了这个报错。
+
+
+1 创建用户表空间：
+CREATE TABLESPACE NOTIFYDB DATAFILE '/home/oracle/app/oracle/oradata/orcl/notifydb.dbf' SIZE 200M AUTOEXTEND ON EXTENT MANAGEMENT LOCAL SEGMENT SPACE MANAGEMENT AUTO;
+
+2 创建用户，指定密码和上边创建的用户表空间
+CREATE USER hc_notify IDENTIFIED BY hc_password DEFAULT TABLESPACE NOTIFYDB;
+
+
+3 赋予权限
+grant connect,resource to hc_notify; 
+grant unlimited tablespace to hc_notify; 
+grant create database link to hc_notify; 
+grant select any sequence,create materialized view to hc_notify;
+
+经过以上操作，我们就可以使用 hc_notify/hc_password 登录指定的实例，创建我们自己的表了
+
+COMMENT ON TABLE hr.admin_emp IS 'Enhanced employee table';
+
+plsqldev配置
+C:\app\dangjunhui\product\11.2.0\client_1
+C:\app\dangjunhui\product\11.2.0\client_1\BIN\oci.dll
+
+
+ORA-12170：连接超时
+=============防火墙中开1521端口=========================
+不关闭防火墙也可以，则要把防火墙的1521端口开启
+方法为：
+vi /etc/sysconfig/iptables
+按照22端口，复制，新加一行粘贴，改成1521就可以啦。
+重启防火墙就可以啦
+
+第一步检查防火墙
+使用 firewall， 开通1521端口
+1、root 运行命令：
+firewall-cmd --get-active-zones
+运行完成之后，可以看到zone名称，如下：
+2、执行如下命令命令：
+firewall-cmd --zone=public --add-port=1521/tcp --permanent
+3、重启防火墙，运行命令：
+firewall-cmd --reload
+4、查看端口号是否开启，运行命令：
+firewall-cmd --query-port=1521/tcp
+
+centos7 
+查看防火墙状态
+/bin/systemctl status firewalld.service
+停止防火墙
+/bin/systemctl stop firewalld.service
+启动防火墙
+/bin/systemctl start firewalld.service
+重启防火墙
+/bin/systemctl restart firewalld.service
+禁止开机启动
+/bin/systemctl disable  firewalld.service
+设置开机启动防火墙
+
+第二步启动监听：
+查看监听状态：
+# su - oracle
+查看当前的监听状态
+$ lsnrctl status
+启动监听
+$ lsnrctl start
+关闭监听
+$ lsnrctl stop
+
+第三步 启动数据库：
+如果在sql*plus环境中使用shutdown命令关闭了数据库，现在要启动数据库的话，必须先用不登陆到数据库服务器的方式进入sqlplus环境，再用startup命令启动数据库。因为数据库没有启动的话，不能登陆数据库，也无法验证用户名和密码。
+$sqlplus / as sysdba
+显示服务名：
+SQL>show parameter service_names
+强制注册服务：
+SQL>alter system register;
+SQL>shutdown immediate;   
+SQL>startup;
+
+
+Linux下建立Oracle服务及其开机自启动
+https://www.cnblogs.com/mophee/archive/2013/06/03/3115805.html
+ps aux | grep ora_ #若无ora_**_**相关的进程，则oracle数据库实例未启动
+netstat -tlnup | grep 1521 #若无任何显示，则监听器未启动
+lsnrctl status #查看监听器状态
+netstat -tlnup | grep 1158 #若无任何显示，则EM未启动
+emctl status dbconsole #查看EM状态
+
+
+Oracle还提供网页版的管理器，要使用该管理器需启动相关服务，使用如下命令启动：
+emctl start dbconsole
+https://192.168.65.128:1158/em
+
+
+
+#启动数据库实例(包含监听器)
+/home/oracle/app/oracle/product/11.2.0/dbhome_1/bin/dbstart /home/oracle/app/oracle/product/11.2.0/
+#关闭数据库实例(包括监听器)
+/home/oracle/app/oracle/product/11.2.0/dbhome_1/bin/dbshut  /home/oracle/app/oracle/product/11.2.0/
+
+
+
+
+以root身份建立开机启动oracle服务的脚本：vim /etc/init.d/oracle，添加如下脚本：
+
+#!/bin/sh
+#chkconfig: 2345 20 80
+#description: Oracle dbstart / dbshut
+#以上两行为chkconfig所需
+ORA_HOME=/home/oracle/app/oracle/product/11.2.0/dbhome_1
+ORA_OWNER=oracle
+LOGFILE=/var/log/oracle.log
+echo "#################################" >> ${LOGFILE}
+date +"### %T %a %D: Run Oracle" >> ${LOGFILE}
+if [ ! -f ${ORA_HOME}/bin/dbstart ] || [ ! -f ${ORA_HOME}/bin/dbshut ]; then
+    echo "Error: Missing the script file ${ORA_HOME}/bin/dbstart or ${ORA_HOME}/bin/dbshut!" >> ${LOGFILE}
+    echo "#################################" >> ${LOGFILE}
+    exit
+fi
+start(){
+    echo "###Startup Database..."
+    su - ${ORA_OWNER} -c "${ORA_HOME}/bin/dbstart ${ORA_HOME}"
+    echo "###Done."
+    echo "###Run database control..."
+    su - ${ORA_OWNER} -c "${ORA_HOME}/bin/emctl start dbconsole"
+    echo "###Done."
+}
+stop(){
+    echo "###Stop database control..."
+    su - ${ORA_OWNER} -c "${ORA_HOME}/bin/emctl stop dbconsole"
+    echo "###Done."
+    echo "###Shutdown Database..."
+    su - ${ORA_OWNER} -c "${ORA_HOME}/bin/dbshut ${ORA_HOME}"
+    echo "###Done."
+}
+case "$1" in
+    'start')
+        start >> ${LOGFILE}
+    ;;
+    'stop')
+        stop >> ${LOGFILE}
+    ;;
+    'restart')
+        stop >> ${LOGFILE}
+        start >> ${LOGFILE}
+    ;;
+esac
+date +"### %T %a %D: Finished." >> ${LOGFILE}
+echo "#################################" >> ${LOGFILE}
+echo ""
+
+chmod a+x /etc/init.d/oracle
+至此，可使用如下命令对oracle进行启动和关闭
+/etc/init.d/oracle start #启动oracle(包括数据库实例、监听器、EM)
+/etc/init.d/oracle stop #关闭oracle
+/etc/init.d/oracle restart #重启oracle
+将 oracle 添加到 chkconfig中：
+chkconfig --add oracle
+可使用如下命令查看和设置oracle服务的开机启动级别：
+chkconfig | grep oracle #查看oracle服务的开机启动级别
+chkconfig --level 24 oracle off #修改oracle服务的开机启动级别
+chkconfig --level 35 oracle on
+
+至此可使用如下命令对oracle的启动或关闭进行管理
+service oracle start #启动
+service oracle stop #关闭
+service oracle restart #重启
+
+建立连接：
+ln -s /etc/init.d/oracle /etc/rc0.d/K01oracle   #关机执行
+ln -s /etc/init.d/oracle /etc/rc6.d/K01oracle   #重启执行
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
