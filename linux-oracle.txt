@@ -1,6 +1,6 @@
 切换到root用户:
 su root
-输入密码:123abc!@#ll
+输入密码:miima1(123...)
 
 
 三、安装Oracle要依赖的软件并安装
@@ -10,7 +10,7 @@ yum -y install binutils compat-libstdc++-33 elfutils-libelf elfutils-libelf-deve
 oracle账户
 Oracle Database 11g Release 2 (11.2.0.1.0) for Linux x86-64 下载地址
 https://www.oracle.com/technetwork/database/enterprise-edition/downloads/112010-linx8664soft-100572.html
-616172218@qq.com/Djh123abc!@#ll
+email/Djh123...
 linux.x64_11gR2_database_1of2.zip (1,239,269,270 bytes) (cksum - 3152418844)
 linux.x64_11gR2_database_2of2.zip (1,111,416,131 bytes) (cksum - 3669256139)
 
@@ -43,7 +43,7 @@ Xmanager6企业版 6.0095 含产品秘钥
 [oracle@dbserver ~]$ export LANG=en_US.UTF-8
 [oracle@dbserver ~]$ cd /home/oracle/database/
 [oracle@dbserver ~]$ ./runInstaller
-616172218@qq.com
+email
 
 
 
